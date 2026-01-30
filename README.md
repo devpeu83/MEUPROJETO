@@ -99,40 +99,15 @@ Para testar o site localmente:
 - Todas as plataformas mencionadas oferecem plano gratuito
 - HTTPS é habilitado automaticamente em todas as plataformas
 - GitHub Actions workflow incluído para deploy automático no GitHub Pages
-
-## 🧹 Organização dos Arquivos
-
-Você pode querer organizar melhor os arquivos. Sugestões:
-
-1. **Criar uma pasta `assets/` ou `images/`:**
-   ```bash
-   mkdir assets
-   mv *.png *.jpg *.webp *.pdf assets/
-   ```
-   
-2. **Remover arquivos não necessários:**
-   - `(1) WhatsApp Business.html` e sua pasta - parecem ser backups/testes
-   - Arquivos de backup: `*-backup.html`
-   
-3. **Estrutura recomendada:**
-   ```
-   MEUPROJETO/
-   ├── index.html
-   ├── quiz/
-   │   └── index.html
-   ├── assets/
-   │   ├── images/
-   │   └── documents/
-   ├── .github/workflows/
-   └── arquivos de configuração
-   ```
+- Headers de segurança configurados (CSP, X-Frame-Options, etc.)
 
 ## 🔒 Segurança
 
-Os arquivos de configuração incluem headers de segurança básicos:
-- Proteção contra XSS
-- Proteção de clickjacking
+Os arquivos de configuração incluem headers de segurança:
+- Content Security Policy (CSP) para proteção contra XSS
+- Proteção de clickjacking (X-Frame-Options)
 - Content-Type sniffing protection
+- Referrer Policy para privacidade
 
 ## 📱 Responsividade
 
