@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz de Desempenho Sexual Masculino</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.35), transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.32), transparent 55%),
+        #020617;
+      color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 24px 12px;
+    }
+    .quiz-container {
+      width: 100%;
+      max-width: 960px;
+      background: radial-gradient(circle at top left, rgba(96, 165, 250, 0.2), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.16), transparent 60%),
+                  linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
+      border-radius: 24px;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(148, 163, 184, 0.3);
+      padding: 26px 20px 30px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(22px);
+    }
+    .quiz-container::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(from 210deg, rgba(56, 189, 248, 0.24), rgba(168, 85, 247, 0.3), rgba(34, 197, 94, 0.26), rgba(56, 189, 248, 0.24));
+      opacity: 0.16;
+      filter: blur(40px);
+      z-index: -2;
+    }
+    .quiz-container::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 22px;
+      background: radial-gradient(circle at top, rgba(148, 163, 184, 0.12), transparent 55%);
+      z-index: -1;
+    }
+    @media (min-width: 768px) {
+      .quiz-container { padding: 32px 36px; }
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      color: #e5e7eb;
+      letter-spacing: 0.02em;
+    }
+    h2 {
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+      color: #e5e7eb;
+    }
+    .subtitle {
+      font-size: 0.95rem;
+      color: #9ca3af;
+      margin-bottom: 16px;
+    }
+    .alert {
+      font-size: 0.85rem;
+      color: #fbbf24;
+      background: rgba(251, 191, 36, 0.08);
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      padding: 8px 10px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .hero-left-top {
+      margin-bottom: 10px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      background: radial-gradient(circle at 0% 0%, rgba(34, 197, 94, 0.35), transparent 55%), rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(34, 197, 94, 0.6);
+      box-shadow: 0 8px 20px rgba(22, 163, 74, 0.35);
+      margin-bottom: 8px;
+    }
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #bbf7d0, #22c55e);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+    .hero-subchips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .chip {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.35), transparent 60%), rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #38bdf8, #a855f7);
+    }
+    .hero-inline-image {
+      margin: 14px 0 18px;
+    }
+    .hero-inline-image img {
+      width: 100%;
+      max-width: 520px;
+      border-radius: 22px;
+      display: block;
+      box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.9),
+        0 0 0 1px rgba(148, 163, 184, 0.7);
+    }
+    .hero-cta {
+      margin-top: 10px;
+      padding: 10px 10px 12px;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(34, 197, 94, 0.3), transparent 60%),
+        rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(34, 197, 94, 0.6);
+      box-shadow: 0 18px 40px rgba(22, 163, 74, 0.45);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-cta-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #e5e7eb;
+      flex: 1 1 180px;
+    }
+    .hero-cta-btn {
+      white-space: nowrap;
+    }
+    .hero-right {
+      display: flex;
+      justify-content: center;
+    }
+    .hero-card {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 4 / 3;
+      border-radius: 22px;
+      padding: 10px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(34, 197, 94, 0.25), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.28), transparent 60%),
+        linear-gradient(145deg, #020617, #020617);
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.95),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+      transform: perspective(900px) rotateY(-8deg) rotateX(5deg);
+      transform-origin: center;
+      transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      pointer-events: none;
+    }
+    .hero-card:hover {
+      transform: perspective(900px) rotateY(-3deg) rotateX(2deg) translateY(-4px);
+      box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.95),
+        0 0 25px rgba(59, 130, 246, 0.5);
+    }
+    .hero-image-wrap {
+      position: absolute;
+      inset: 14px;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.07) contrast(1.03);
+      transform: scale(1.02);
+    }
+    .hero-pill {
+      position: absolute;
+      left: 18px;
+      bottom: 16px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 0% 0%, rgba(250, 250, 250, 0.75), rgba(148, 163, 184, 0.4));
+      color: #020617;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow:
+        0 10px 26px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(148, 163, 184, 0.5);
+    }
+    .hero-pill-glow {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #22c55e, #16a34a);
+      box-shadow:
+        0 0 12px rgba(22, 163, 74, 0.9),
+        0 0 30px rgba(34, 197, 94, 0.9);
+    }
+    .hero-pill-text-main {
+      display: block;
+    }
+    .hero-pill-text-sub {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 500;
+      opacity: 0.85;
+    }
+    .progress {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: #1f2937;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #22c55e, #a855f7);
+      transition: width 0.25s ease-out;
+    }
+    .question {
+      margin-bottom: 24px;
+      padding: 16px 16px 14px;
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.33), transparent 65%),
+        radial-gradient(circle at 100% 100%, rgba(34, 197, 94, 0.3), transparent 60%),
+        rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      box-shadow:
+        0 16px 45px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+    }
+    .question-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #e5e7eb;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    label.option {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.93rem;
+      padding: 6px 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.18s ease-out, transform 0.08s ease-out, box-shadow 0.18s ease-out;
+    }
+    label.option:hover {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(52, 211, 153, 0.45), transparent 60%),
+        rgba(31, 41, 55, 0.96);
+      transform: translateY(-1px) translateZ(0);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.9);
+    }
+    label.option input {
+      margin-top: 2px;
+      accent-color: #22c55e;
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+      justify-content: flex-end;
+    }
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.08s ease-out, box-shadow 0.1s ease-out, background 0.15s ease-out;
+    }
+    button.primary {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #04101a;
+      box-shadow:
+        0 10px 25px rgba(34, 197, 94, 0.6),
+        0 0 0 1px rgba(21, 128, 61, 0.7);
+    }
+    button.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 35px rgba(34, 197, 94, 0.5);
+    }
+    button.secondary {
+      background: transparent;
+      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+    button.secondary:hover {
+      background: rgba(15, 23, 42, 0.9);
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      display: none;
+    }
+    .result-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .result-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .tag-leve { background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.6); }
+    .tag-moderado { background: rgba(251, 191, 36, 0.1); color: #facc15; border: 1px solid rgba(251, 191, 36, 0.6); }
+    .tag-importante { background: rgba(248, 113, 113, 0.1); color: #fca5a5; border: 1px solid rgba(248, 113, 113, 0.6); }
+    .result-body {
+      font-size: 0.93rem;
+      color: #d1d5db;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .result-list {
+      margin-left: 16px;
+      margin-top: 6px;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+    .result-list li { margin-bottom: 4px; }
+    .disclaimer {
+      font-size: 0.78rem;
+      color: #9ca3af;
+      margin-top: 10px;
+    }
+    .cta-product {
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(55, 65, 81, 0.9);
+    }
+    .cta-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #e5e7eb;
+    }
+    .cta-text {
+      font-size: 0.9rem;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+    .cta-media {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+    .cta-media-img {
+      width: 80px;
+      height: auto;
+      border-radius: 16px;
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(148, 163, 184, 0.4);
+      transform: translateY(0) scale(1);
+      transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+    }
+    .cta-media-img:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow:
+        0 26px 60px rgba(0, 0, 0, 0.9),
+        0 0 18px rgba(34, 197, 94, 0.5);
+    }
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .small-note {
+      font-size: 0.78rem;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    .mobile-callout-image {
+      display: none;
+      margin: 10px 0 16px;
+    }
+    .mobile-callout-image img {
+      width: 100%;
+      border-radius: 18px;
+      box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.85),
+        0 0 0 1px rgba(148, 163, 184, 0.55);
+      display: block;
+    }
+    @media (max-width: 768px) {
+      body {
+        padding: 16px 10px;
+      }
+      .quiz-container {
+        padding: 20px 16px 22px;
+        border-radius: 20px;
+      }
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+      }
+      .hero-left-top {
+        text-align: left;
+      }
+      .hero-subchips {
+        gap: 6px;
+      }
+      .hero-right {
+        justify-content: flex-start;
+      }
+      .hero-card {
+        max-width: 100%;
+        transform: perspective(700px) rotateY(-4deg) rotateX(3deg);
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+      .subtitle {
+        font-size: 0.9rem;
+      }
+      .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .hero-cta-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .question {
+        padding: 14px 12px 12px;
+      }
+      .buttons {
+        justify-content: center;
+      }
+      button {
+        width: 100%;
+        justify-content: center;
+      }
+      .cta-actions {
+        flex-direction: column;
+      }
+      .mobile-callout-image {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="quiz-container">
+    <header>
+      <div class="hero">
+        <div class="hero-left">
+          <div class="hero-left-top">
+            <div class="hero-badge">
+              <span class="hero-badge-dot"></span>
+              <span>Experiência 100% sigilosa • Resultado instantâneo</span>
+            </div>
+            <h1>Descubra seu nível de desempenho sexual</h1>
+            <div class="hero-inline-image">
+              <img src="../depositphotos_184072756-stock-photo-young-unhappy-couple-having-problems.jpg" alt="Casal preocupado com desempenho sexual" />
+            </div>
+            <p class="subtitle">Responda a 12 perguntas rápidas e anônimas. No final, você vai entender melhor seu nível de desempenho, quais cuidados tomar e quando faz sentido considerar opções naturais. Este quiz não substitui consulta médica.</p>
+            <p class="alert"><strong>Atenção:</strong> nada aqui substitui acompanhamento médico. Não pare nenhum remédio por conta própria e, em caso de dor, sangramento ou piora súbita, procure atendimento médico imediatamente.</p>
+            <div class="hero-cta">
+              <p class="hero-cta-title">Sente que seu desempenho não é mais o mesmo? Comece agora um quiz rápido e descubra seu nível em menos de 2 minutos.</p>
+              <button type="button" class="primary hero-cta-btn" id="startQuizBtn">Começar o quiz agora</button>
+            </div>
+          </div>
+          <div class="hero-subchips">
+            <span class="chip"><span class="chip-dot"></span>Avaliação guiada em minutos</span>
+            <span class="chip"><span class="chip-dot"></span>Sem necessidade de dados sensíveis</span>
+            <span class="chip"><span class="chip-dot"></span>Foco em saúde e performance</span>
+          </div>
+        </div>
+      </div>
+      <div class="mobile-callout-image">
+        <img src="../depositphotos_184072756-stock-photo-young-unhappy-couple-having-problems.jpg" alt="Comece agora seu quiz de desempenho sexual" />
+      </div>
+      <p class="progress" id="progressText">Pergunta 1 de 12</p>
+      <div class="progress-bar"><div class="progress-bar-fill" id="progressBar"></div></div>
+    </header>
+
+    <form id="quizForm">
+      <!-- 1) Idade -->
+      <section class="question" data-question="1">
+        <h2 class="question-title">1) Qual a sua faixa etária?</h2>
+        <div class="options">
+          <label class="option"><input type="radio" name="q1" value="a" required> Menos de 30 anos</label>
+          <label class="option"><input type="radio" name="q1" value="b"> 30 a 39 anos</label>
+          <label class="option"><input type="radio" name="q1" value="c"> 40 a 49 anos</label>
+          <label class="option"><input type="radio" name="q1" value="d"> 50 a 59 anos</label>
+          <label class="option"><input type="radio" name="q1" value="e"> 60 anos ou mais</label>
+        </div>
+      </section>
+
+      <!-- 2) Frequência de dificuldade -->
+      <section class="question" data-question="2">
+        <h2 class="question-title">2) Com que frequência você tem dificuldade para manter a ereção durante a relação?</h2>
+        <div class="options">
+          <label class="option"><input type="radio" name="q2" value="a" required> Quase nunca</label>
+          <label class="option"><input type="radio" name="q2" value="b"> Às vezes (1–2 vezes por mês)</label>
+          <label class="option"><input type="radio" name="q2" value="c"> Com frequência (quase toda semana)</label>
+          <label class="option"><input type="radio" name="q2" value="d"> Quase sempre ou sempre</label>
+        </div>
+      </section>
+
+      <!-- 3) Ereção suficiente -->
+      <section class="question" data-question="3">
+        <h2 class="question-title">3) Quando consegue ter ereção, ela é suficiente para manter a relação até o fim?</h2>
+        <div class="options">
+          <label class="option"><input type="radio" name="q3" value="a" required> Sim, praticamente sempre</label>
+          <label class="option"><input type="radio" name="q3" value="b"> Na maior parte das vezes</label>
+          <label class="option"><input type="radio" name="q3" value="c"> Às vezes é suficiente, às vezes não</label>
+          <label class="option"><input type="radio" name="q3" value="d"> Raramente é suficiente</label>
+        </div>
+      </section>
+
+      <!-- 4) Libido -->
+      <section class="question" data-question="4">
+        <h2 class="question-title">4) Como está sua vontade de ter relações (libido)?</h2>
+        <div class="options">
+          <label class="option"><input type="radio" name="q4" value="a" required> Normal ou mais alta que antes</label>
+          <label class="option"><input type="radio" name="q4" value="b"> Um pouco mais baixa que antes</label>
+          <label class="option"><input type="radio" name="q4" value="c"> Bem mais baixa que antes</label>
+          <label class="option"><input type="radio" name="q4" value="d"> Quase inexistente</label>
+        </div>
+      </section>
+
+      <!-- 5) Tempo de queixa -->
+      <section class="question" data-question="5">
+        <h2 class="question-title">5) Há quanto tempo você percebe queda no desempenho sexual?</h2>
+        <div class="options">
+          <label class="option"><input type="radio" name="q5" value="a" required> Menos de 3 meses</label>
+          <label class="option"><input type="radio" name="q5" value="b"> Entre 3 meses e 1 ano</label>
+          <label class="option"><input type="radio" name="q5" value="c"> Entre 1 e 3 anos</label>
+          <label class="option"><input type="radio" name="q5" value="d"> Mais de 3 anos</label>
+        </div>
+      </section>
+
+      <!-- 6) Impacto no relacionamento -->
+      <section class="question" data-question="6">
+        <h2 class="question-title">6) Seu relacionamento é afetado por isso?</h2>
+        <div class="options">
+          <label class="option"><input type="radio" name="q6" value="a" required> Não, quase não interfere</label>
+          <label class="option"><input type="radio" name="q6" value="b"> Um pouco, mas ainda controlamos bem</label>
+          <label class="option"><input type="radio" name="q6" value="c"> Sim, gera discussões ou afastamento</label>
+          <label class="option"><input type="radio" name="q6" value="d"> Muito, sinto que está abalando o relacionamento</label>
+        </div>
+      </section>
+
+      <!-- 7) Estresse -->
+      <section class="question" data-question="7">
+        <h2 class="question-title">7) Como está seu nível de estresse e cansaço no dia a dia?</h2>
+        <div class="options">
+          <label class="option"><input type="radio" name="q7" value="a" required> Baixo, me sinto bem</label>
+          <label class="option"><input type="radio" name="q7" value="b"> Moderado, mas ainda dou conta</label>
+          <label class="option"><input type="radio" name="q7" value="c"> Alto, vivo cansado e preocupado</label>
+          <label class="option"><input type="radio" name="q7" value="d"> Extremamente alto, atrapalha sono e humor</label>
+        </div>
+      </section>
+
+      <!-- 8) Estilo de vida -->
+      <section class="question" data-question="8">
+        <h2 class="question-title">8) Qual seu estilo de vida hoje?</h2>
+        <div class="options">
+          <label class="option"><input type="radio" name="q8" value="a" required> Me alimento bem e faço atividade física regular</label>
+          <label class="option"><input type="radio" name="q8" value="b"> Tento cuidar, mas como mal às vezes e quase não treino</label>
+          <label class="option"><input type="radio" name="q8" value="c"> Alimentação ruim e sedentarismo</label>
+          <label class="option"><input type="radio" name="q8" value="d"> Fumo, bebo com frequência e sou sedentário</label>
+        </div>
+      </section>
+
+      <!-- 9) Problemas de saúde -->
+      <section class="question" data-question="9">
+        <h2 class="question-title">9) Você já recebeu diagnóstico de algum desses problemas?</h2>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="q9" value="pressao"> Pressão alta</label>
+          <label class="option"><input type="checkbox" name="q9" value="diabetes"> Diabetes</label>
+          <label class="option"><input type="checkbox" name="q9" value="colesterol"> Colesterol alto</label>
+          <label class="option"><input type="checkbox" name="q9" value="obesidade"> Obesidade</label>
+          <label class="option"><input type="checkbox" name="q9" value="cardiaco"> Problemas cardíacos</label>
+          <label class="option"><input type="checkbox" name="q9" value="ansiedade"> Ansiedade / depressão</label>
+          <label class="option"><input type="checkbox" name="q9" value="controlado"> Uso de antidepressivos ou remédios controlados</label>
+          <label class="option"><input type="checkbox" name="q9" value="nenhum"> Nenhum dos acima / não sei</label>
+        </div>
+      </section>
+
+      <!-- 10) Já falou com médico -->
+      <section class="question" data-question="10">
+        <h2 class="question-title">10) Você já conversou com um médico sobre sua dificuldade de ereção?</h2>
+        <div class="options">
+          <label class="option"><input type="radio" name="q10" value="a" required> Sim, faço acompanhamento regular</label>
+          <label class="option"><input type="radio" name="q10" value="b"> Já fui, mas não segui o tratamento</label>
+          <label class="option"><input type="radio" name="q10" value="c"> Nunca fui por vergonha</label>
+          <label class="option"><input type="radio" name="q10" value="d"> Nunca fui porque acho que não é tão grave</label>
+        </div>
+      </section>
+
+      <!-- 11) Remédios de farmácia -->
+      <section class="question" data-question="11">
+        <h2 class="question-title">11) Sobre o uso de remédios de farmácia para ereção (tipo comprimidos conhecidos):</h2>
+        <div class="options">
+          <label class="option"><input type="radio" name="q11" value="a" required> Já usei com orientação médica</label>
+          <label class="option"><input type="radio" name="q11" value="b"> Já usei por conta própria, sem receita</label>
+          <label class="option"><input type="radio" name="q11" value="c"> Nunca usei, mas tenho curiosidade</label>
+          <label class="option"><input type="radio" name="q11" value="d"> Nunca usei e não tenho interesse</label>
+        </div>
+      </section>
+
+      <!-- 12) Produtos naturais -->
+      <section class="question" data-question="12">
+        <h2 class="question-title">12) Sobre produtos naturais para desempenho sexual (cápsulas, ervas, fórmulas naturais):</h2>
+        <div class="options">
+          <label class="option"><input type="radio" name="q12" value="a" required> Já uso e me sinto bem assim</label>
+          <label class="option"><input type="radio" name="q12" value="b"> Nunca usei, mas tenho interesse</label>
+          <label class="option"><input type="radio" name="q12" value="c"> Tenho medo se realmente funciona e se é seguro</label>
+          <label class="option"><input type="radio" name="q12" value="d"> Só usaria com orientação de profissional de saúde</label>
+        </div>
+      </section>
+
+      <div class="buttons">
+        <button type="button" class="secondary" id="resetBtn">Limpar respostas</button>
+        <button type="submit" class="primary">Ver meu resultado</button>
+      </div>
+    </form>
+
+    <section class="result" id="resultBox">
+      <div class="result-header">
+        <p class="result-tag" id="resultTag"></p>
+        <h3 class="result-title" id="resultTitle"></h3>
+      </div>
+      <p class="result-body" id="resultText"></p>
+      <ul class="result-list" id="resultList"></ul>
+
+      <div class="cta-product" id="ctaProduct" style="display:none;">
+        <p class="cta-title">Quer conhecer uma opção natural como complemento?</p>
+        <div class="cta-media">
+          <img src="../depositphotos_184072756-stock-photo-young-unhappy-couple-having-problems.jpg" alt="Casal preocupado com desempenho" class="cta-media-img" />
+          <p class="cta-text">Se fizer sentido para você, é possível conhecer uma opção natural que algumas pessoas utilizam como apoio para a saúde sexual masculina.</p>
+        </div>
+        <div class="cta-actions">
+          <button type="button" class="primary" id="productBtn">Quero saber mais</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function() {
+      const form = document.getElementById('quizForm');
+      const resultBox = document.getElementById('resultBox');
+      const resultTag = document.getElementById('resultTag');
+      const resultTitle = document.getElementById('resultTitle');
+      const resultText = document.getElementById('resultText');
+      const resultList = document.getElementById('resultList');
+      const ctaProduct = document.getElementById('ctaProduct');
+      const resetBtn = document.getElementById('resetBtn');
+      const productBtn = document.getElementById('productBtn');
+      const startQuizBtn = document.getElementById('startQuizBtn');
+      const progressText = document.getElementById('progressText');
+      const progressBar = document.getElementById('progressBar');
+
+      const totalQuestions = 12;
+
+      function updateProgress() {
+        const sections = Array.from(document.querySelectorAll('.question'));
+        let answered = 0;
+
+        sections.forEach(sec => {
+          const qNum = sec.getAttribute('data-question');
+          if (!qNum) return;
+
+          if (qNum === '9') {
+            const checkboxes = sec.querySelectorAll('input[type="checkbox"][name="q9"]');
+            const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+            if (anyChecked) answered++;
+          } else {
+            const name = 'q' + qNum;
+            const selected = form.querySelector('input[name="' + name + '"]:checked');
+            if (selected) answered++;
+          }
+        });
+
+        const percent = Math.round((answered / totalQuestions) * 100);
+        progressText.textContent = 'Pergunta ' + Math.max(1, answered) + ' de ' + totalQuestions;
+        progressBar.style.width = percent + '%';
+      }
+
+      form.addEventListener('change', updateProgress);
+      updateProgress();
+
+      function getScore() {
+        let score = 0;
+
+        const q2 = form.q2?.value;
+        if (q2 === 'b') score += 1;
+        if (q2 === 'c') score += 2;
+        if (q2 === 'd') score += 3;
+
+        const q3 = form.q3?.value;
+        if (q3 === 'b') score += 1;
+        if (q3 === 'c') score += 2;
+        if (q3 === 'd') score += 3;
+
+        const q4 = form.q4?.value;
+        if (q4 === 'b') score += 1;
+        if (q4 === 'c') score += 2;
+        if (q4 === 'd') score += 3;
+
+        const q7 = form.q7?.value;
+        if (q7 === 'b') score += 1;
+        if (q7 === 'c') score += 2;
+        if (q7 === 'd') score += 3;
+
+        const q8 = form.q8?.value;
+        if (q8 === 'b') score += 1;
+        if (q8 === 'c') score += 2;
+        if (q8 === 'd') score += 3;
+
+        const q9Checks = form.querySelectorAll('input[name="q9"]:checked');
+        let q9Problems = 0;
+        q9Checks.forEach(cb => {
+          if (cb.value !== 'nenhum') q9Problems++;
+        });
+        if (q9Problems === 1) score += 1;
+        if (q9Problems >= 2) score += 2;
+
+        const q10 = form.q10?.value;
+        if (q10 === 'b') score += 1;
+        if (q10 === 'c' || q10 === 'd') score += 2;
+
+        return score;
+      }
+
+      function buildResult(score) {
+        let level, tagClass, title, text, items;
+
+        if (score <= 4) {
+          level = 'LEVE';
+          tagClass = 'tag-leve';
+          title = 'Sinais leves de alteração no desempenho.';
+          text = 'Seus resultados indicam alterações leves no desempenho sexual, algo comum e muitas vezes ligado a estresse, cansaço, sono ruim e estilo de vida.';
+          items = [
+            'Ajustar sono, alimentação e movimento do corpo já pode ajudar bastante;',
+            'Reduzir álcool e cigarro, se for o caso;',
+            'Conversar abertamente com a parceira(o) para diminuir a pressão e a ansiedade;',
+            'Considerar uma conversa com médico para checar hormônios, circulação e saúde geral;',
+            'Produtos naturais podem ser um apoio complementar, mas sempre com responsabilidade.'
+          ];
+        } else if (score <= 9) {
+          level = 'MODERADO';
+          tagClass = 'tag-moderado';
+          title = 'Impacto moderado no desempenho sexual.';
+          text = 'Os resultados mostram um impacto moderado no seu desempenho, com sinais que já interferem na qualidade das relações e possivelmente na autoestima.';
+          items = [
+            'Marcar consulta com urologista ou clínico para investigar causas físicas e hormonais;',
+            'Rever hábitos diários: alimentação, exercício, sono e manejo do estresse;',
+            'Evitar automedicação com comprimidos de farmácia ou doses elevadas por conta própria;',
+            'Conversar com profissional de saúde sobre uso de medicamentos e/ou produtos naturais como complemento;',
+            'Tratar também o lado emocional, como ansiedade de desempenho e expectativas irreais.'
+          ];
+        } else {
+          level = 'IMPORTANTE';
+          tagClass = 'tag-importante';
+          title = 'Impacto importante na função sexual.';
+          text = 'Seus resultados sugerem um impacto importante na função sexual, possivelmente com presença de doenças associadas e forte interferência no relacionamento ou autoestima.';
+          items = [
+            'Procurar um médico o quanto antes para avaliação completa é prioridade;',
+            'Alguns problemas de ereção podem ser sinal de alterações cardíacas, hormonais ou metabólicas;',
+            'Não iniciar ou aumentar doses de medicamentos por conta própria, mesmo que sejam vendidos livremente;',
+            'Levar todas as dúvidas sobre tratamentos, inclusive opções naturais, para discutir diretamente com o médico;',
+            'Cuidar da saúde global (peso, pressão, glicemia, colesterol, sono e mente) costuma melhorar também o desempenho sexual.'
+          ];
+        }
+
+        resultTag.className = 'result-tag ' + tagClass;
+        resultTag.textContent = 'Nível ' + level;
+        resultTitle.textContent = title;
+        resultText.textContent = text;
+
+        resultList.innerHTML = '';
+        items.forEach(i => {
+          const li = document.createElement('li');
+          li.textContent = i;
+          resultList.appendChild(li);
+        });
+
+        resultBox.style.display = 'block';
+
+        ctaProduct.style.display = 'block';
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        if (!form.checkValidity()) {
+          alert('Responda às perguntas obrigatórias antes de ver o resultado.');
+          return;
+        }
+
+        const q9Checks = form.querySelectorAll('input[name="q9"]:checked');
+        if (q9Checks.length === 0) {
+          const confirmNone = confirm('Você não marcou nenhuma opção na pergunta 9. Se realmente não tiver diagnóstico, clique em OK para continuar.');
+          if (!confirmNone) return;
+        }
+
+        const score = getScore();
+        buildResult(score);
+        updateProgress();
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      resetBtn.addEventListener('click', function() {
+        form.reset();
+        resultBox.style.display = 'none';
+        ctaProduct.style.display = 'none';
+        updateProgress();
+      });
+
+      productBtn.addEventListener('click', function() {
+        window.location.href = 'https://erectusoriginal.netlify.app/';
+      });
+
+      if (startQuizBtn) {
+        startQuizBtn.addEventListener('click', function() {
+          const firstQuestion = document.querySelector('.question');
+          if (firstQuestion) {
+            firstQuestion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
