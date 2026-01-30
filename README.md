@@ -6,16 +6,29 @@ Este é o website do Erectus Plus, incluindo um quiz interativo sobre desempenho
 
 ```
 MEUPROJETO/
-├── index.html              # Página inicial (redireciona para o quiz)
-├── quiz/                   # Pasta contendo o quiz
-│   ├── index.html          # Quiz principal
-│   └── ...                 # Outros arquivos relacionados
-├── *.png, *.jpg, *.webp   # Imagens e assets
-├── *.pdf                  # Documentos
-└── configurações de deploy # netlify.toml, vercel.json
+├── index.html                    # Página inicial (redireciona para o quiz)
+├── quiz/                         # Pasta contendo o quiz
+│   ├── index.html                # Quiz principal
+│   └── quiz-erectus.html         # Quiz alternativo
+├── assets/                       # Recursos do site
+│   ├── images/                   # Todas as imagens (PNG, JPG, WEBP)
+│   └── documents/                # Documentos PDF
+├── .github/
+│   └── workflows/
+│       └── deploy.yml            # GitHub Actions para deploy automático
+├── netlify.toml                  # Configuração Netlify
+├── vercel.json                   # Configuração Vercel
+├── .gitignore                    # Arquivos ignorados pelo Git
+├── LICENSE                       # Licença MIT
+├── README.md                     # Este arquivo
+└── DEPLOYMENT.md                 # Guia detalhado de deploy
 ```
 
 ## 🚀 Como Hospedar o Site
+
+> 📖 **Para instruções detalhadas**, veja o arquivo [DEPLOYMENT.md](DEPLOYMENT.md)
+
+### Resumo Rápido:
 
 ### Opção 1: GitHub Pages (Gratuito e Simples) ⭐ RECOMENDADO
 
