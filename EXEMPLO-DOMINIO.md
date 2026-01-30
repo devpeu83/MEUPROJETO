@@ -84,13 +84,13 @@ Este projeto atualmente está hospedado em:
 
 ## Próximos Passos
 
-1. ✅ Escolher um nome de domínio
-2. ✅ Verificar disponibilidade
-3. ✅ Registrar o domínio
-4. ✅ Contratar hospedagem web
-5. ✅ Configurar DNS
-6. ✅ Fazer upload dos arquivos do site
-7. ✅ Testar o domínio
+1. ☐ Escolher um nome de domínio
+2. ☐ Verificar disponibilidade
+3. ☐ Registrar o domínio
+4. ☐ Contratar hospedagem web
+5. ☐ Configurar DNS
+6. ☐ Fazer upload dos arquivos do site
+7. ☐ Testar o domínio
 
 ---
 

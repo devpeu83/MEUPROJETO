@@ -1,11 +1,11 @@
-# MEUPROJETO - Quiz Erectus Plus
+# Quiz Erectus Plus
 
 Este é um projeto de quiz interativo para o produto Erectus Plus, focado em desempenho sexual masculino.
 
 ## 📁 Estrutura do Projeto
 
 ```
-MEUPROJETO/
+quiz-erectus-plus/
 ├── index.html              # Página de redirecionamento
 ├── quiz/
 │   └── quiz-erectus.html  # Quiz principal
