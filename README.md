@@ -17,19 +17,24 @@ MEUPROJETO/
 
 ## 🚀 Como Hospedar o Site
 
-### Opção 1: GitHub Pages (Gratuito e Simples)
+### Opção 1: GitHub Pages (Gratuito e Simples) ⭐ RECOMENDADO
 
 1. **Ativar GitHub Pages:**
    - Vá para o repositório no GitHub
    - Clique em "Settings" (Configurações)
    - No menu lateral, clique em "Pages"
-   - Em "Source", selecione a branch `main` (ou a branch desejada)
-   - Em "Folder", selecione `/ (root)`
-   - Clique em "Save"
+   - Em "Source", selecione "GitHub Actions"
+   - O workflow `.github/workflows/deploy.yml` cuidará do deploy automaticamente
 
 2. **Acessar o site:**
    - O site estará disponível em: `https://devpeu83.github.io/MEUPROJETO/`
    - Aguarde alguns minutos para o deploy ser concluído
+   - Cada push na branch `main` atualiza o site automaticamente
+
+**Nota:** Se preferir usar o método tradicional sem GitHub Actions:
+   - Em "Source", selecione a branch `main`
+   - Em "Folder", selecione `/ (root)`
+   - Clique em "Save"
 
 ### Opção 2: Netlify (Mais Recursos)
 
@@ -93,6 +98,34 @@ Para testar o site localmente:
 - Não requer banco de dados ou servidor backend
 - Todas as plataformas mencionadas oferecem plano gratuito
 - HTTPS é habilitado automaticamente em todas as plataformas
+- GitHub Actions workflow incluído para deploy automático no GitHub Pages
+
+## 🧹 Organização dos Arquivos
+
+Você pode querer organizar melhor os arquivos. Sugestões:
+
+1. **Criar uma pasta `assets/` ou `images/`:**
+   ```bash
+   mkdir assets
+   mv *.png *.jpg *.webp *.pdf assets/
+   ```
+   
+2. **Remover arquivos não necessários:**
+   - `(1) WhatsApp Business.html` e sua pasta - parecem ser backups/testes
+   - Arquivos de backup: `*-backup.html`
+   
+3. **Estrutura recomendada:**
+   ```
+   MEUPROJETO/
+   ├── index.html
+   ├── quiz/
+   │   └── index.html
+   ├── assets/
+   │   ├── images/
+   │   └── documents/
+   ├── .github/workflows/
+   └── arquivos de configuração
+   ```
 
 ## 🔒 Segurança
 
