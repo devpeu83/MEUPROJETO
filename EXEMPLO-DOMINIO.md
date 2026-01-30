@@ -10,7 +10,7 @@ Para o site do **Erectus Plus Quiz**, aqui estão alguns exemplos de domínios a
 
 ### Opções Recomendadas:
 
-1. **quizerectuplus.com.br**
+1. **quizerectusplus.com.br**
    - Domínio brasileiro (.com.br)
    - Direto e relacionado ao produto
    - Fácil de lembrar e digitar
@@ -20,10 +20,10 @@ Para o site do **Erectus Plus Quiz**, aqui estão alguns exemplos de domínios a
    - Combina o nome do produto com "quiz"
    - Boa opção para alcance global
 
-3. **testeereplus.com.br**
+3. **testerectusplus.com.br**
    - Usa "teste" que é sinônimo de quiz em português
-   - Versão mais curta e fácil de lembrar
-   - Mantém conexão com o produto
+   - Mantém o nome completo do produto
+   - Fácil de lembrar e digitar
 
 4. **quizdesempenho.com.br**
    - Foca no tema do quiz (desempenho sexual masculino)
@@ -42,7 +42,7 @@ Para o site do **Erectus Plus Quiz**, aqui estão alguns exemplos de domínios a
 Um domínio completo possui três partes principais:
 
 ```
-https://www.quizerectuplus.com.br
+https://www.quizerectusplus.com.br
   │      │        │          └─── Domínio de Primeiro Nível (TLD)
   │      │        └──────────────── Nome do Domínio
   │      └───────────────────────── Subdomínio (opcional)
@@ -69,8 +69,9 @@ https://www.quizerectuplus.com.br
 - Use registradores como:
   - GoDaddy
   - Namecheap
-  - Google Domains
+  - Squarespace Domains
   - HostGator
+  - Cloudflare
 
 ## Configuração Atual
 
@@ -95,15 +96,15 @@ Este projeto atualmente está hospedado em:
 
 **Exemplo prático de uso:**
 
-Se você registrar **quizerectuplus.com.br**, as pessoas poderão acessar seu quiz digitando:
+Se você registrar **quizerectusplus.com.br**, as pessoas poderão acessar seu quiz digitando:
 ```
-https://quizerectuplus.com.br
+https://quizerectusplus.com.br
 ```
 
 ou
 
 ```
-https://www.quizerectuplus.com.br
+https://www.quizerectusplus.com.br
 ```
 
 O arquivo `index.html` já está configurado para redirecionar automaticamente para o quiz principal em `quiz/quiz-erectus.html`.
