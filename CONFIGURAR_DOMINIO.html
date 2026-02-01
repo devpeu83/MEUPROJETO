@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurar Domínio Customizado</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .success-badge {
+            background: rgba(34, 197, 94, 0.3);
+            border: 3px solid #22c55e;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.3rem;
+        }
+        .platform-selector {
+            display: flex;
+            gap: 10px;
+            margin: 30px 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .platform-btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.5);
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            color: white;
+        }
+        .platform-btn:hover, .platform-btn.active {
+            background: rgba(255,255,255,0.3);
+            border-color: #ffd700;
+            transform: scale(1.05);
+        }
+        .platform-content {
+            display: none;
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        .platform-content.active {
+            display: block;
+        }
+        .step {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 5px solid #ffd700;
+        }
+        .step-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .step-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .code-box {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .dns-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .dns-table th, .dns-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .dns-table th {
+            background: rgba(255,255,255,0.2);
+            font-weight: bold;
+        }
+        .warning {
+            background: rgba(251, 191, 36, 0.2);
+            border: 2px solid #fbbf24;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        .info {
+            background: rgba(59, 130, 246, 0.2);
+            border: 2px solid #3b82f6;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        .link {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+        .checklist li:before {
+            content: "☐ ";
+            font-size: 1.3rem;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 Configurar Domínio Customizado</h1>
+        <p class="subtitle">Seu domínio está pronto! Vamos configurá-lo agora.</p>
+        
+        <div class="success-badge">
+            ✅ Seu domínio e hospedagem estão prontos!<br>
+            Siga os passos abaixo para conectá-los ao seu site.
+        </div>
+
+        <div class="info">
+            <strong>📖 Documentação Completa:</strong> Para instruções detalhadas, consulte o arquivo 
+            <strong>CUSTOM_DOMAIN.md</strong> na raiz do projeto.
+        </div>
+
+        <h2 style="margin: 30px 0 15px;">Escolha sua Plataforma de Hospedagem:</h2>
+        <div class="platform-selector">
+            <button class="platform-btn" onclick="showPlatform('github')">GitHub Pages</button>
+            <button class="platform-btn" onclick="showPlatform('netlify')">Netlify</button>
+            <button class="platform-btn" onclick="showPlatform('vercel')">Vercel</button>
+        </div>
+
+        <!-- GitHub Pages -->
+        <div id="github" class="platform-content">
+            <h2>🐙 GitHub Pages</h2>
+            
+            <div class="step">
+                <div class="step-number">1️⃣</div>
+                <div class="step-title">Editar arquivo CNAME</div>
+                <div class="step-content">
+                    Abra o arquivo <code>CNAME</code> na raiz do projeto e substitua pelo seu domínio:
+                    <div class="code-box">
+www.seudominio.com.br</div>
+                    <div class="warning">
+                        ⚠️ Remova todos os comentários (#) e deixe apenas o domínio!
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2️⃣</div>
+                <div class="step-title">Commit e Push</div>
+                <div class="step-content">
+                    <div class="code-box">
+git add CNAME<br>
+git commit -m "Add custom domain"<br>
+git push origin main</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3️⃣</div>
+                <div class="step-title">Configurar no GitHub</div>
+                <div class="step-content">
+                    1. Vá em: <a href="https://github.com/devpeu83/MEUPROJETO/settings/pages" target="_blank" class="link">Settings → Pages</a><br>
+                    2. Em "Custom domain", digite seu domínio<br>
+                    3. Clique em "Save"<br>
+                    4. Aguarde a verificação DNS
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4️⃣</div>
+                <div class="step-title">Configurar DNS</div>
+                <div class="step-content">
+                    No painel do seu provedor de domínio, adicione estes registros:
+                    <table class="dns-table">
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Nome</th>
+                            <th>Valor</th>
+                            <th>TTL</th>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>@</td>
+                            <td>185.199.108.153</td>
+                            <td>3600</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>@</td>
+                            <td>185.199.109.153</td>
+                            <td>3600</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>@</td>
+                            <td>185.199.110.153</td>
+                            <td>3600</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>@</td>
+                            <td>185.199.111.153</td>
+                            <td>3600</td>
+                        </tr>
+                        <tr>
+                            <td>CNAME</td>
+                            <td>www</td>
+                            <td>devpeu83.github.io</td>
+                            <td>3600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">5️⃣</div>
+                <div class="step-title">Aguardar e Ativar HTTPS</div>
+                <div class="step-content">
+                    1. Aguarde 24-48h para DNS propagar<br>
+                    2. Volte em Settings → Pages<br>
+                    3. Marque "Enforce HTTPS"<br>
+                    4. ✅ Pronto! Acesse seu domínio
+                </div>
+            </div>
+        </div>
+
+        <!-- Netlify -->
+        <div id="netlify" class="platform-content">
+            <h2>🔷 Netlify</h2>
+            
+            <div class="step">
+                <div class="step-number">1️⃣</div>
+                <div class="step-title">Adicionar Domínio no Netlify</div>
+                <div class="step-content">
+                    1. Acesse seu site no Netlify Dashboard<br>
+                    2. Vá em "Domain settings"<br>
+                    3. Clique em "Add custom domain"<br>
+                    4. Digite: <code>www.seudominio.com.br</code><br>
+                    5. Clique em "Verify" e "Add domain"
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2️⃣</div>
+                <div class="step-title">Configurar DNS</div>
+                <div class="step-content">
+                    No painel do seu provedor de domínio:
+                    <table class="dns-table">
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Nome</th>
+                            <th>Valor</th>
+                        </tr>
+                        <tr>
+                            <td>CNAME</td>
+                            <td>www</td>
+                            <td>seu-site.netlify.app</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>@</td>
+                            <td>75.2.60.5</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3️⃣</div>
+                <div class="step-title">Habilitar HTTPS</div>
+                <div class="step-content">
+                    1. Aguarde DNS propagar (até 24h)<br>
+                    2. Em "Domain settings", clique em "Verify DNS configuration"<br>
+                    3. Clique em "Provision certificate"<br>
+                    4. ✅ HTTPS será configurado automaticamente!
+                </div>
+            </div>
+        </div>
+
+        <!-- Vercel -->
+        <div id="vercel" class="platform-content">
+            <h2>⚡ Vercel</h2>
+            
+            <div class="step">
+                <div class="step-number">1️⃣</div>
+                <div class="step-title">Adicionar Domínio no Vercel</div>
+                <div class="step-content">
+                    1. Acesse seu projeto no Vercel Dashboard<br>
+                    2. Vá em "Settings" → "Domains"<br>
+                    3. Digite seu domínio e clique em "Add"<br>
+                    4. O Vercel mostrará as configurações DNS necessárias
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2️⃣</div>
+                <div class="step-title">Configurar DNS</div>
+                <div class="step-content">
+                    No painel do seu provedor de domínio:
+                    <table class="dns-table">
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Nome</th>
+                            <th>Valor</th>
+                        </tr>
+                        <tr>
+                            <td>CNAME</td>
+                            <td>www</td>
+                            <td>cname.vercel-dns.com</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>@</td>
+                            <td>76.76.19.19</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3️⃣</div>
+                <div class="step-title">Verificação Automática</div>
+                <div class="step-content">
+                    1. O Vercel verificará o DNS automaticamente<br>
+                    2. HTTPS é configurado automaticamente<br>
+                    3. Status mudará para "Valid"<br>
+                    4. ✅ Pronto! Seu domínio está configurado
+                </div>
+            </div>
+        </div>
+
+        <h2 style="margin: 40px 0 20px;">✅ Checklist de Configuração</h2>
+        <ul class="checklist">
+            <li>Domínio registrado e ativo</li>
+            <li>Acesso ao painel de DNS do domínio</li>
+            <li>Arquivo CNAME configurado (se GitHub Pages)</li>
+            <li>Domínio adicionado na plataforma de hospedagem</li>
+            <li>Registros DNS configurados no provedor</li>
+            <li>Aguardado propagação DNS (24-48h)</li>
+            <li>DNS propagado mundialmente (verificar em dnschecker.org)</li>
+            <li>Site acessível pelo domínio customizado</li>
+            <li>HTTPS funcionando (cadeado verde)</li>
+            <li>Redirecionamento www funcionando</li>
+        </ul>
+
+        <div class="info" style="margin-top: 30px;">
+            <strong>🔍 Verificar Propagação DNS:</strong><br>
+            Use estas ferramentas para verificar se o DNS já propagou:<br>
+            • <a href="https://dnschecker.org/" target="_blank" class="link">DNSChecker.org</a><br>
+            • <a href="https://www.whatsmydns.net/" target="_blank" class="link">WhatsmyDNS.net</a>
+        </div>
+
+        <div class="warning" style="margin-top: 20px;">
+            <strong>⏱️ Tempo de Propagação:</strong><br>
+            O DNS pode levar de 2 a 48 horas para propagar mundialmente.
+            Seja paciente e verifique periodicamente!
+        </div>
+    </div>
+
+    <script>
+        function showPlatform(platform) {
+            // Hide all platforms
+            document.querySelectorAll('.platform-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelectorAll('.platform-btn').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Show selected platform
+            document.getElementById(platform).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

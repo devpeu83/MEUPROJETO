@@ -129,12 +129,36 @@ O site é responsivo e funciona em:
 - Tablet
 - Mobile
 
+## 🌐 Domínio Customizado
+
+Quer usar seu próprio domínio (ex: www.seudominio.com.br)?
+
+### Guias Disponíveis:
+
+- **[CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)** - Guia completo e detalhado
+- **[DOMINIO_RAPIDO.txt](DOMINIO_RAPIDO.txt)** - Guia rápido em texto
+- **[CONFIGURAR_DOMINIO.html](CONFIGURAR_DOMINIO.html)** - Guia interativo (abra no navegador)
+
+### Resumo Rápido:
+
+1. **Edite o arquivo CNAME** com seu domínio
+2. **Configure DNS** no seu provedor (A records + CNAME)
+3. **Ative na plataforma** (GitHub Pages/Netlify/Vercel)
+4. **Aguarde propagação** (24-48h)
+5. **Pronto!** Acesse seu domínio com HTTPS
+
+Consulte os guias acima para instruções detalhadas de cada plataforma.
+
 ## 🆘 Suporte
 
 Para problemas com deploy:
 - GitHub Pages: [Documentação](https://docs.github.com/en/pages)
 - Netlify: [Documentação](https://docs.netlify.com/)
 - Vercel: [Documentação](https://vercel.com/docs)
+
+Para domínio customizado:
+- Veja: [CUSTOM_DOMAIN.md](CUSTOM_DOMAIN.md)
+- GitHub Custom Domain: [Docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)
 
 ---
 
